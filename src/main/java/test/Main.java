@@ -5,14 +5,7 @@ import com.sun.jna.Memory;
 import com.sun.jna.Native;
 import com.sun.jna.Pointer;
 
-/*
- * libcob interface, initialising GnuCOBOL run time
- */
-interface libcob extends Library {
-	libcob INSTANCE = (libcob) Native.loadLibrary("cob", libcob.class);
-
-	void cob_init(int argc, Pointer argv);
-}
+import cobol.GnuCobolLibrary;
 
 /*
  * first COBOL program interface, single program
@@ -47,7 +40,7 @@ public class Main {
 		 * oppure java -Djna.library.path=<path to the library> Main
 		 */
 		try {
-			libcob.INSTANCE.cob_init(0, null);
+			cobol.GnuCobolLibrary.INSTANCE.cob_init(0, null);
 		} catch (UnsatisfiedLinkError e) {
 			System.out.println("Libcob Exception" + e);
 		}
